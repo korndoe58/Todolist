@@ -13,12 +13,8 @@ const TodoList: React.FC = () => {
   const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem('todos') || '[]') as Todo[];
-    setTodos(storedTodos);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
+    const completedTodos = todos.filter((todo) => todo.completed);
+    localStorage.setItem('todos', JSON.stringify(completedTodos));
   }, [todos]);
 
   const handleAddTodo = () => {
